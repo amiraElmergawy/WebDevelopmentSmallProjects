@@ -1,0 +1,14 @@
+.task{
+    /*width: 25%;
+    *//*margin: 5%;
+    */padding: 2%;
+    background-color: rgb(29, 134, 11);
+    color: aliceblue;
+}
+
+span{
+    font-size: 20px;
+    display: block;
+    /* width: 90%;
+    margin: 10% 0; */
+}
