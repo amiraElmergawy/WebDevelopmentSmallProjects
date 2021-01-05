@@ -1,23 +1,25 @@
+// todoList = [
+//     {
+//         title: 'first title',
+//         type: 't1',
+//         description: 'first description',
+//         status: false
+//     },
+//     {
+//         title: 'second title',
+//         type: 't3',
+//         description: 'second description',
+//         status: false
+//     },
+// ],
+//window.localStorage.setItem('todoList', JSON.stringify(todoList));
 let taskKeys = ['title', 'type', 'description'],
-    todoList = [
-        {
-            title: 'first title',
-            type: 't1',
-            description: 'first description',
-            status: false
-        },
-        {
-            title: 'second title',
-            type: 't3',
-            description: 'second description',
-            status: false
-        },
-    ],
     btnShow = document.querySelector('#showHide'),
     form = document.querySelector("#addTask"),
     dataSec = document.querySelector('#dataSection');
-window.localStorage.setItem('todoList', JSON.stringify(todoList));
+todoList = JSON.parse(window.localStorage.getItem('todoList')) || []; // save empty array if it is not exist
 
+//disply process
 addElement = function (elementType, elementInnerText, parent, property = null, propertyValue = null) {
     element = document.createElement(elementType);
     element.innerHTML = elementInnerText;
@@ -27,43 +29,37 @@ addElement = function (elementType, elementInnerText, parent, property = null, p
     }
 }
 
-//disply process
+appendSingleTask = function(elementIndex){
+    div = document.createElement('div');
+    addElement('span', elementIndex, div, 'className', 'd-none');
+    taskKeys.forEach(key => {
+        addElement('span', todoList[elementIndex][key], div);
+    });
+    addElement('i', '', div, 'className', 'fas fa-trash btn text-white');
+    addElement('i', '', div, 'className', 'fas fa-pencil-alt btn text-white');
+    div.className = 'task';
+    dataSec.appendChild(div);
+}
+
 showTasks = function (flag = false) { // flag will be false at the first time calling showTasks else will be true
-    // console.log(JSON.parse(window.localStorage.getItem('todoList')));
-    todoList = JSON.parse(window.localStorage.getItem('todoList'));
     if (todoList.length != 0) { // if their is data display
         if (flag) {
             // append only the last task
-            div = document.createElement('div');
-            addElement('span', todoList.length - 1, div, 'className', 'd-none');
-            taskKeys.forEach(key => {
-                addElement('span', todoList[todoList.length - 1][key], div);
-            });
-            addElement('i', '', div, 'className', 'fas fa-trash btn text-white');
-            addElement('i', '', div, 'className', 'fas fa-pencil-alt btn text-white');
-            div.className = 'task';
-            dataSec.appendChild(div);
+            appendSingleTask(todoList.length - 1);
         } else {
             // show all tasks
             dataSec.innerHTML = '';
             todoList.forEach((task, i) => {
-                div = document.createElement('div');
-                addElement('span', i, div, 'className', 'd-none');
-                taskKeys.forEach(key => {
-                    addElement('span', task[key], div);
-                });
-                addElement('i', '', div, 'className', 'fas fa-trash btn text-white');
-                addElement('i', '', div, 'className', 'fas fa-pencil-alt btn text-white');
-                div.className = 'task';
-                dataSec.appendChild(div);
+                appendSingleTask(i);
             });
         }
-    } else {
-        dataSec.innerHTML = '<h1>No Data Found</h1>'
+        // } else {
+        // dataSec.innerHTML = '<h1>No Data Found</h1>';
     }
 }
 
 btnShow.addEventListener('click', function (e) {
+    this.textContent == "Add Task"? this.textContent="Hide Form":this.textContent="Add Task";
     document.querySelector('#formSection').classList.toggle('d-none');
 });
 
@@ -86,59 +82,20 @@ form.addEventListener('submit', function (e) {
 showTasks();
 
 //deletion process
-// console.log(allDeletionNodes);
-// document.querySelectorAll('.fa-trash').forEach(item => {
-//     item.addEventListener('click', function (e) {
-//         let deletionDiv = e.target.parentElement;
-//         let index = +deletionDiv.firstChild.innerHTML;
-//         // console.log(deletionDiv.parentElement);
-//         deletionDiv.parentElement.removeChild(deletionDiv);
-//         // console.log(deletionDiv.parentElement);
-//         // allDeletionNodes.splice(index, 1);
-//         todoList.splice(index, 1);
-//         window.localStorage.setItem('todoList', JSON.stringify(todoList));
-//         console.log(document.querySelectorAll('.fa-trash'));
-//         showTasks(false);
-//     })
-// })
-
-
-// let allDeletionNodes = document.querySelectorAll('.fa-trash'); // save all divs that can be deleted
-// dataSec.addEventListener('click', function (e) {
-//     console.log('el event 7sl');
-//     console.log(dataSec.contains);
-//     console.log(dataSec.innerHTML);
-//     console.log(e.target.parentElement)
-//     allDeletionNodes.forEach((div, index) => {
-//         console.log('mn dakhl el 7adth elaul');
-//         if (div == e.target.parentElement) {
-//             console.log('mn dakhl el 7adth');
-//             dataSec.removeChild(div);
-//             todoList.splice(index, 1);
-//             window.localStorage.setItem('todoList', JSON.stringify(todoList));
-//             showTasks(false);
-//         }
-//     })
-// })
-
-// document.getElementsByClassName('.fa-trash').addEventListener('click', function (e) {
-//     let index = +e.target.parentElement.firstChild.innerHTML;
-//     todoList.splice(index, 1);
-//     window.localStorage.setItem('todoList', JSON.stringify(todoList));
-//     showTasks(false);
-// })
-
 dataSec.addEventListener('click', function (e) {
-    let deletionDiv = e.target.parentElement;
-    let index = +deletionDiv.firstChild.innerHTML; // access first hidden span that contain its id
-    dataSec.removeChild(deletionDiv);
-    todoList.splice(index, 1);
-    window.localStorage.setItem('todoList', JSON.stringify(todoList));
-    showTasks(false);
+    let element = e.target;
+    if (element.className.includes('fa-trash')) {
+        let deletionDiv = element.parentElement;
+        let index = +deletionDiv.firstChild.innerHTML; // access first hidden span that contain its id
+        dataSec.removeChild(deletionDiv);
+        todoList.splice(index, 1);
+        window.localStorage.setItem('todoList', JSON.stringify(todoList));
+        showTasks();
+    }
 })
 
 
 //editting process
-document.querySelector('.fa-pencil-alt').addEventListener('click', function (e) {
-    e.target.parentElement.classList.toggle('bg-dark')
-})
+// document.querySelector('.fa-pencil-alt').addEventListener('click', function (e) {
+//     e.target.parentElement.classList.toggle('bg-dark')
+// })
