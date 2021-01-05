@@ -30,6 +30,7 @@ addElement = function (elementType, elementInnerText, parent, property = null, p
 }
 
 appendSingleTask = function(elementIndex){
+    let flag;
     div = document.createElement('div');
     addElement('span', elementIndex, div, 'className', 'd-none');
     taskKeys.forEach(key => {
@@ -38,6 +39,9 @@ appendSingleTask = function(elementIndex){
     addElement('i', '', div, 'className', 'fas fa-trash btn text-white');
     addElement('i', '', div, 'className', 'fas fa-pencil-alt btn text-white');
     div.className = 'task';
+    if (todoList[elementIndex].status == true) {
+        div.classList.add('bg-dark');
+    }
     dataSec.appendChild(div);
 }
 
@@ -81,21 +85,19 @@ form.addEventListener('submit', function (e) {
 
 showTasks();
 
-//deletion process
+//delete and edit processes
 dataSec.addEventListener('click', function (e) {
     let element = e.target;
-    if (element.className.includes('fa-trash')) {
-        let deletionDiv = element.parentElement;
-        let index = +deletionDiv.firstChild.innerHTML; // access first hidden span that contain its id
-        dataSec.removeChild(deletionDiv);
+    let parentDiv = element.parentElement;
+    let index = +parentDiv.firstChild.innerHTML; // access first hidden span that contain its id
+    if (element.className.includes('trash')) {
+        dataSec.removeChild(parentDiv);
         todoList.splice(index, 1);
-        window.localStorage.setItem('todoList', JSON.stringify(todoList));
-        showTasks();
+    } else if (element.className.includes('pencil')) {
+        // parentDiv.classList.toggle('bg-dark');
+        todoList[index].status == false? todoList[index].status = true : todoList[index].status = false;
     }
+    window.localStorage.setItem('todoList', JSON.stringify(todoList));
+    showTasks();
 })
 
-
-//editting process
-// document.querySelector('.fa-pencil-alt').addEventListener('click', function (e) {
-//     e.target.parentElement.classList.toggle('bg-dark')
-// })
