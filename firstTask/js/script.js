@@ -14,10 +14,16 @@
 // ],
 //window.localStorage.setItem('todoList', JSON.stringify(todoList));
 let taskKeys = ['title', 'type', 'description'],
+    types = ['t1', 't2', 't3', 't4'],
     btnShow = document.querySelector('#showHide'),
     form = document.querySelector("#addTask"),
     dataSec = document.querySelector('#dataSection');
 todoList = JSON.parse(window.localStorage.getItem('todoList')) || []; // save empty array if it is not exist
+temp = "";
+types.forEach(add=>{
+    temp += `<option value="${add}">${add}</option>`
+})
+document.querySelector('select').innerHTML += temp;
 
 //disply process
 addElement = function (elementType, elementInnerText, parent, property = null, propertyValue = null) {
@@ -94,8 +100,7 @@ dataSec.addEventListener('click', function (e) {
         dataSec.removeChild(parentDiv);
         todoList.splice(index, 1);
     } else if (element.className.includes('pencil')) {
-        // parentDiv.classList.toggle('bg-dark');
-        todoList[index].status == false? todoList[index].status = true : todoList[index].status = false;
+        todoList[index].status = ! todoList[index].status;
     }
     window.localStorage.setItem('todoList', JSON.stringify(todoList));
     showTasks();
