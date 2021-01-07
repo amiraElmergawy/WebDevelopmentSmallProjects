@@ -98,7 +98,7 @@ document.getElementById('charForm').addEventListener('submit', (e) => {
             messageDisplay.textContent = 'Not correct, Try Again';
             if (ImageIndex < 6) ImageIndex++;
             if (lifeTimes == 0) { // player can't try again
-                messageDisplay.innerHTML = '<p>Sorry for your lose</p><p>Go back to play again</p>';
+                messageDisplay.innerHTML = '<span>Sorry for your lose, </span><span>Go back to play again</span>';
                 document.getElementById('charForm').classList.add('d-none');
             }
         } else {
@@ -108,7 +108,7 @@ document.getElementById('charForm').addEventListener('submit', (e) => {
             if (wordLength != 0) messageDisplay.textContent = `just ${wordLength} guess to win`;
             else {
                 document.getElementById('charForm').classList.add('d-none');
-                messageDisplay.innerHTML = '<p>Congratulations ^_^</p><p>Go back to play again</p>';
+                messageDisplay.innerHTML = '<span>Congratulations ^_^, </span><span>Go back to play again</span>';
             }
         }
     } else {
