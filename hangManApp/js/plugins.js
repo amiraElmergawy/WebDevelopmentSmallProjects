@@ -11,6 +11,17 @@ let word = '', // convert word that player one guessed to array
     messageDisplay = document.getElementById('messageDisplay'),
     imageDisplay = document.getElementById('imageDisplay'),
     lettersDisplay = document.getElementById('letters'),
+    images = [
+        "./resources/images/Hangman-0.png",
+        "./resources/images/Hangman-1.png",
+        "./resources/images/Hangman-2.png",
+        "./resources/images/Hangman-3.png",
+        "./resources/images/Hangman-4.png",
+        "./resources/images/Hangman-5.png",
+        "./resources/images/Hangman-6.png"
+    ],
+        ImageIndex = 1,
+        lifeTimes = 6,
     fillLetterDivs = (word)=>{
         wordCopy = word;
     word.forEach(element => {
@@ -42,6 +53,9 @@ backBtnListner.addEventListener('click', (e) => {
     wordLength = 0;
     char = '';
     lettersDisplay.innerHTML = '';
+    messageDisplay.innerHTML = '';
+    ImageIndex = 0;
+    imageDisplay.src = images[ImageIndex];
 })
 addElement = function (elementType, elementInnerHTML, parent, property, propertyValue) {
     element = document.createElement(elementType);
@@ -62,17 +76,6 @@ document.getElementById('wordForm').addEventListener('submit', (e) => {
     }
 })
 
-let images = [
-    "./resources/images/Hangman-0.png",
-    "./resources/images/Hangman-1.png",
-    "./resources/images/Hangman-2.png",
-    "./resources/images/Hangman-3.png",
-    "./resources/images/Hangman-4.png",
-    "./resources/images/Hangman-5.png",
-    "./resources/images/Hangman-6.png"
-],
-    ImageIndex = 1,
-    lifeTimes = 6;
 document.getElementById('charForm').addEventListener('submit', (e) => {
     e.preventDefault();
     allDivs = document.querySelectorAll('.text-uppercase');
@@ -116,35 +119,3 @@ document.getElementById('charForm').addEventListener('submit', (e) => {
     }
     document.getElementById('charForm').reset()
 })
-
-// while (lifeTimes != 0 && wordLength != 0) {
-//     const char = prompt('Guess a character');
-//     for (let index = 0; index < word.length; index++) {
-//         const element = word[index]
-//         if (element == char) {// if the character is included by word
-//             word.splice(index, 1); // that will decrease word length
-//             index--; // as the array length will decrease by one
-//             // // console.log(element, word);
-//         }
-//     }
-//     // i++;
-//     if (word.length == wordLength) { // the gussed char. isn't correct
-//         // decrease player two life times
-//         // update hangman image
-//         lifeTimes--;
-//         imageDisplay.src = images[ImageIndex];
-//         ImageIndex ++;
-//         // alert(lifeTimes);
-//     } else {
-//         // update wordLength var. for next comparison
-//         messageDisplay.textContent = 'good guessing';
-//         wordLength = word.length;
-//         if (wordLength != 0) messageDisplay.textContent = `just ${wordLength} guess to win`;
-//     }
-
-// }
-
-
-
-
-
