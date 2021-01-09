@@ -1,5 +1,5 @@
 let word = '', // convert word that player one guessed to array
-    wordCopy='', //to save the original word
+    wordCopy = '', //to save the original word
     wordLength = 0, // save word length to compare it with itself every character guessing time
     char = '',
     onePlayerListner = document.getElementById('onePlayer'),
@@ -20,14 +20,14 @@ let word = '', // convert word that player one guessed to array
         "./resources/images/Hangman-5.png",
         "./resources/images/Hangman-6.png"
     ],
-        ImageIndex = 1,
-        lifeTimes = 6,
-    fillLetterDivs = (word)=>{
+    ImageIndex = 1,
+    lifeTimes = 6,
+    fillLetterDivs = (word) => {
         wordCopy = word;
-    word.forEach(element => {
-        addElement('div', `<span class='d-none'>${element}</span>`, lettersDisplay, 'className', 'back-btn p-3 text-uppercase smallest-font animate__heartBeat');
-    });
-    wordLength = word.length;
+        word.forEach(element => {
+            addElement('div', `<span class='d-none'>${element}</span>`, lettersDisplay, 'className', 'back-btn p-3 text-uppercase smallest-font animate__heartBeat');
+        });
+        wordLength = word.length;
     };
 onePlayerListner.addEventListener('click', (e) => {
     firstPageDiv.classList.add('d-none');
@@ -56,6 +56,7 @@ backBtnListner.addEventListener('click', (e) => {
     messageDisplay.innerHTML = '';
     ImageIndex = 0;
     imageDisplay.src = images[ImageIndex];
+    document.getElementById('wordForm').reset();
 })
 addElement = function (elementType, elementInnerHTML, parent, property, propertyValue) {
     element = document.createElement(elementType);
@@ -65,7 +66,6 @@ addElement = function (elementType, elementInnerHTML, parent, property, property
 }
 document.getElementById('wordForm').addEventListener('submit', (e) => {
     e.preventDefault();
-    // // console.log(e.target.word.value);
     word = Array.from(e.target.word.value);
     if (word != '' || word.length != 0) {
         secondPageDiv.classList.add('d-none');
@@ -80,7 +80,6 @@ document.getElementById('charForm').addEventListener('submit', (e) => {
     e.preventDefault();
     allDivs = document.querySelectorAll('.text-uppercase');
     console.log(word)
-    // console.log(lettersDisplay);
     if (word != '' || char.length != 0) {
         char = e.target.char.value;
         for (let index = 0; index < word.length; index++) {
@@ -88,9 +87,17 @@ document.getElementById('charForm').addEventListener('submit', (e) => {
             if (element == char) {// if the character is included by word
                 word.splice(index, 1); // that will decrease word length
                 // let divIndex = wordCopy.indexOf(element);
-                // allDivs[divIndex].children[0].classList.remove('d-none');
-                //allDivs.removeChild(div);
-                index--; // as the array length will decrease by one
+                let div = allDivs[index];
+                div.children[0].classList.remove('d-none');
+                // allDivs[index].children[0].classList.add('animate__heartBeat');
+                // allDivs[index].classList.add('wow');
+                // allDivs[index].classList.add('animate__heartBeat');
+                setTimeout(() => {
+                    lettersDisplay.removeChild(div);
+                    index--; // as the array length will decrease by one
+                },
+                    2000
+                );
             }
         }
         if (word.length == wordLength) { // the gussed char. isn't correct
@@ -103,6 +110,7 @@ document.getElementById('charForm').addEventListener('submit', (e) => {
             if (lifeTimes == 0) { // player can't try again
                 messageDisplay.innerHTML = '<span>Sorry for your lose, </span><span>Go back to play again</span>';
                 document.getElementById('charForm').classList.add('d-none');
+                document.getElementById('wordAndLetters').classList.add('d-none');
             }
         } else {
             // update wordLength var. for next comparison
@@ -110,12 +118,27 @@ document.getElementById('charForm').addEventListener('submit', (e) => {
             wordLength = word.length;
             if (wordLength != 0) messageDisplay.textContent = `just ${wordLength} guess to win`;
             else {
-                document.getElementById('charForm').classList.add('d-none');
                 messageDisplay.innerHTML = '<span>Congratulations ^_^, </span><span>Go back to play again</span>';
+                document.getElementById('charForm').classList.add('d-none');
+                document.getElementById('wordAndLetters').classList.add('d-none');
             }
         }
     } else {
         alert('Please, enter a correct character');
     }
     document.getElementById('charForm').reset()
+})
+
+document.getElementById('showBtn').addEventListener('click', (e) => {
+    allDivs = document.querySelectorAll('.text-uppercase');
+    allDivs.forEach(div => {
+        div.children[0].classList.remove('d-none');
+    })
+    setTimeout(() =>
+        allDivs.forEach(div => {
+            div.children[0].classList.add('d-none');
+            document.getElementById('showBtn').classList.add('d-none');
+        }),
+        300
+    );
 })

@@ -41,7 +41,6 @@
             <div class="col-9 offset-1 col-md-8 offset-md-2 p-0">
                 <form class="d-flex justify-content-between" id="wordForm">
                     <div class="w-50">
-                        <!-- <label class="form-label">Email address</label> -->
                         <input type="text" class="back-btn w-100" name="word" placeholder="Write the word...">
                     </div>
                     <button type="submit" class="btn back-btn w-25">Submit</button>
@@ -49,32 +48,22 @@
             </div>
         </div>
         <div class="row w-100 p-0 mx-0 d-none" id="thirdDiv">
-            <div class="row w-100 mb-3">
+            <div class="row w-100 mb-3" id="wordAndLetters">
                 <div class="col-4 offset-1 col-md-3 offset-md-2 p-0">
                     <h1 class=" smaller-font">
                         The Word is
                     </h1>
                 </div>
-                <div class="col-5 col-md-5 d-flex justify-content-between p-0 mt-2" id="letters">
-                    <!-- <div class="back-btn p-2">
-                    </div>
-                    <div class="back-btn p-2">
-                    </div>
-                    <div class="back-btn p-2">
-                    </div>
-                    <div class="back-btn p-2">
-                    </div>
-                    <div class="back-btn p-2">
-                    </div>
-                    <div class="back-btn p-2">
-                    </div> -->
+                <div class="col-5 col-md-5 d-flex justify-content-between p-0 mt-2 " id="letters">
+                </div>
+                <div class="btn back-btn col-1 p-0 mt-3 mx-3 h-50" id="showBtn" title="show for second">
+                    Show
                 </div>
             </div>
             <div class="row">
                 <div class="col-6 offset-1 col-md-5 offset-md-2 px-0 py-1">
                     <form class="d-flex my-4" id="charForm">
                         <div class="w-75">
-                            <!-- <label class="form-label">Email address</label> -->
                             <input type="text" name="char" class="back-btn w-100" placeholder="Guess Character...">
                         </div>
                         <button type="submit" class="btn back-btn w-25">Submit</button>
@@ -93,8 +82,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
         crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
     <script src="./js/plugins.js"></script>
-    <!-- <script src="./js/playgroung.js"></script> -->
 </body>
 
 </html>
