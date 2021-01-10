@@ -57,6 +57,12 @@ backBtnListner.addEventListener('click', (e) => {
     ImageIndex = 0;
     imageDisplay.src = images[ImageIndex];
     document.getElementById('wordForm').reset();
+    let charForm = document.getElementById('charForm');
+    let wordPart = document.getElementById('wordAndLetters');
+    if (charForm.classList.contains('d-none')) {
+        charForm.classList.remove('d-none');
+        wordPart.classList.remove('d-none');
+    }
 })
 addElement = function (elementType, elementInnerHTML, parent, property, propertyValue) {
     element = document.createElement(elementType);
