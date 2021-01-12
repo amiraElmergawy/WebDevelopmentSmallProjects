@@ -6,7 +6,7 @@ let customers = [{
     accNumber: 1,
     name: 'hmada',
     balance: 50
-}];
+}]; // only for testing
 let createFileData = (fileName, data = null) => {
     if (data) fs.writeFileSync(fileName, JSON.stringify(data));
     else fs.writeFileSync(fileName, '[]');
