@@ -83,7 +83,7 @@ yargs.command({
         } else { // accNumber not enterd
             customers = readFileData('test.json');
             customers.push({
-                accNumber: customers.length+1, // as we begin from 1 ==> we can check before adding this number too ^_^
+                accNumber: customers[customers.length-1].accNumber+1, // as we begin from 1 ==> we can check before adding this number too ^_^
                 name: argv.name,
                 balance: argv.balance
             })
