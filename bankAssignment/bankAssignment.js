@@ -2,11 +2,7 @@ const yargs = require('yargs');
 let fs = require('fs');
 // const { argv } = require('process');
 // const { number } = require('yargs');
-let customers = [{
-    accNumber: 1,
-    name: 'hmada',
-    balance: 50
-}];
+let customers = [];
 let createFileData = (fileName, data = null) => {
     if (data) fs.writeFileSync(fileName, JSON.stringify(data));
     else fs.writeFileSync(fileName, '[]');
