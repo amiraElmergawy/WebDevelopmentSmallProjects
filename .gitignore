@@ -10,3 +10,11 @@ ToDoListExpressJS/node_modules/sshpk/lib/ssh-buffer.js
 ToDoListExpressJS/node_modules/sshpk/man/man1/sshpk-conv.1
 ToDoListExpressJS/node_modules/sshpk/LICENSE
 *.cmd
+*.js
+*.json
+ToDoListExpressJS/node_modules/encodeurl/LICENSE
+*.md
+ToDoListExpressJS/node_modules/har-schema/LICENSE
+ToDoListExpressJS/node_modules/hbs/LICENSE
+*.markdown
+ToDoListExpressJS/node_modules/http-errors/LICENSE
