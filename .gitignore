@@ -31,3 +31,4 @@ ToDoListExpressJS/node_modules/verror/.npmignore
 ToDoListExpressJS/node_modules/wordwrap/LICENSE
 *.txt
 ToDoListExpressJS/node_modules/utils-merge/LICENSE
+/ToDoListExpressJS/node_modules
