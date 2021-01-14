@@ -1,0 +1,28 @@
+{{>header}}
+{{>navbar}}
+
+<div class="container-fluid mt-3">
+    <div class="row w-100 m-auto text-center">
+        {{#if error}}
+        <div class="col-12 alert alert-danger">
+            Error loading data
+        </div>
+        {{else}}
+        {{#each data}}
+        <div class="col-3 border border-secondary my-3 mx-5">
+            {{#if this.completed}}
+            <span class="alert alert-success m-4">Completed</span>
+            {{else}}
+            <span class="alert alert-danger m-4">Not Completed</span>
+            {{/if}}
+            <details class="my-4">
+                <summary class="display-4">Task {{this.id}}</summary>
+            <h4 class="my-4">{{this.title}}</h4>
+            </details>
+        </div>
+        {{/each}}
+        {{/if}}
+    </div>
+</div>
+
+{{>footer}}
