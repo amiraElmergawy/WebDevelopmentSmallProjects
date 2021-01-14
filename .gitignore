@@ -18,3 +18,16 @@ ToDoListExpressJS/node_modules/har-schema/LICENSE
 ToDoListExpressJS/node_modules/hbs/LICENSE
 *.markdown
 ToDoListExpressJS/node_modules/http-errors/LICENSE
+ToDoListExpressJS/node_modules/.bin/handlebars
+ToDoListExpressJS/node_modules/.bin/mime
+*.ps1
+*.map
+*.jst
+ToDoListExpressJS/node_modules/depd/LICENSE
+ToDoListExpressJS/node_modules/destroy/LICENSE
+ToDoListExpressJS/node_modules/ee-first/LICENSE
+ToDoListExpressJS/node_modules/uuid/bin/uuid
+ToDoListExpressJS/node_modules/verror/.npmignore
+ToDoListExpressJS/node_modules/wordwrap/LICENSE
+*.txt
+ToDoListExpressJS/node_modules/utils-merge/LICENSE
