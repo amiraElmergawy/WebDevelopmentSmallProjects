@@ -9,6 +9,10 @@ function showFlashMessage(element) {
 
 //   var flashMessages = document.getElementsByClassName('js-flash-message');
 
+// document.getElementById('addForm').addEventListener('submit', (e)=>{
+
+// })
+
 btnShow.addEventListener('click', (e) => {
     e.target.textContent == 'Add Customer' ?
         e.target.textContent = 'Hide Form' : e.target.textContent = 'Add Customer'
@@ -21,7 +25,7 @@ let checkUpdateAvailability = function () {
         console.log(editBtn)
         if (editBtn.length != 0) {
             return false
-        } 
+        }
         return true
     } catch (e) {
         console.log(e)
@@ -43,28 +47,28 @@ updateBtns.forEach((element, index) => {
             btnsArea[index].innerHTML = '<button class="btn btn-success" id="edit" value="{{this._id}}" >Update</button>'
             // console.log(customerTableRow.getElementsByTagName('td')[2].textContent)
             // console.log(customerTableRow.firstChild.textContent) // will be empty if its data is dynamic
-            document.getElementById('edit').addEventListener('click', function(e){
+            document.getElementById('edit').addEventListener('click', function (e) {
                 const newName = customerTableRow.getElementsByTagName('td')[1].textContent
                 console.log(newName)
                 const newBalance = Number(customerTableRow.getElementsByTagName('td')[2].textContent)
                 console.log(newBalance)
                 // id: customerId,
                 var customer = {
-                    name:newName,
+                    name: newName,
                     balance: newBalance
                 }
-            fetch(`/customers/${customerId}`, {
-                method: 'put',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(customer)
-            }).then(_=>{
-                location.reload();
-            })
+                fetch(`/customers/${customerId}`, {
+                    method: 'put',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customer)
+                }).then(_ => {
+                    location.reload();
+                })
                 // btnsArea[index].innerHTML = '<button class="btn btn-success" id="update" value="customerId" title="Edit customer"><i class="fas fa-pencil-alt"></i></button> <button class="btn btn-danger" id="delete" value="customerId"><i class="fas fa-trash"></i></button>'
             })
         }
         else //show first flash message avilable in your page
-        console.log('can\'t edit this row' )
+            console.log('can\'t edit this row')
         // showFlashMessage(flashMessages[0]);
 
 
@@ -78,7 +82,7 @@ deleteBtns.forEach((element, index) => {
         fetch(`/customers/${customerId}`, {
             method: 'delete',
             headers: { 'Content-Type': 'application/json' }
-        }).then(_=>{
+        }).then(_ => {
             location.reload();
         })
     })

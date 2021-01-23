@@ -1,0 +1,31 @@
+{{>header}}
+{{!-- {{#each responce}}
+<div>
+    {{this.message }}
+</div>
+{{/each}} --}}
+{{#if responce.status}}
+<div class="alert alert-success w-100">
+    {{!-- message: --}}
+    {{responce.message}}
+    {{data.message}}
+</div>
+{{else}}
+<div class="alert alert-danger w-100">
+    {{!-- message: --}}
+    {{responce.message}}
+    {{data.message}}
+</div>
+{{/if}}
+
+<div class="m-auto">
+
+    <a href="/">
+        <button class="btn btn-primary">Home</button>
+    </a>
+</div>
+</div>
+</div>
+</body>
+
+</html>

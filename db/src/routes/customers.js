@@ -26,20 +26,20 @@ router.post('/addCustomer', async (req, res) => {
     const customer = new customerModel(req.body)
     try {
         await customer.save()
-        res.status(200).send('<div class="alert alert-success" role="alert">data inserted succefully</div> <a href="/" class="btn btn-primary">Home</a>')
-        // res.send({
-        //     status: 1,
-        //     message: 'successfuly',
-        //     data: customer
-        // })
+        const responce = {
+            status: 1,
+            message: 'data inserted successfuly',
+            data: customer}
+        // res.status(200)
+        res.render('addCustomer',responce)
+        console.log(responce)
     }
     catch (e) {
-        res.status(500).send('<div class="alert alert-danger" role="alert">data inserting failed</div> <a href="/" class="btn btn-primary">Home</a>')
-        // res.send({
-        //     status: 0,
-        //     message: 'data inserting error',
-        //     data: e
-        // })
+        res.send({
+            status: 0,
+            message: 'data inserting error',
+            data: e
+        })
     }
 })
 
@@ -90,20 +90,20 @@ router.put('/customers/:customerid', async (req, res) => {
             message: 'customer not found',
             data: ''
         })
-        res.status(200).send('<div class="alert alert-success" role="alert">data updated succefully</div> <a href="/" class="btn btn-primary">Home</a>')
-        //     {
-        //     status: 1,
-        //     message: "updated",
-        //     data: customer
-        // })
+        res.status(200).send(
+            {
+            status: 1,
+            message: "updated",
+            data: customer
+        })
     }
     catch (e) {
-        res.status(500).send('<div class="alert alert-danger" role="alert">data editing failed</div> <a href="/" class="btn btn-primary">Home</a>')
-        //     {
-        //     status: 0,
-        //     message: 'error in edit',
-        //     data: ''
-        // })
+        res.status(500).send(
+            {
+            status: 0,
+            message: 'error in edit',
+            data: ''
+        })
     }
 })
 

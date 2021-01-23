@@ -23,4 +23,8 @@ app.use(express.json())
 app.use(express.urlencoded());
 app.use(customerRoutes)
 
+app.get('*',(req,res)=>{
+    res.render('404')
+})
+
 app.listen(port)
